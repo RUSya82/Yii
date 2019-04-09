@@ -16,8 +16,9 @@ class TestController extends Controller
 
     public function actionIndex()
     {
-        $product = new Product(35, 'reebok', 'shoose', 350);
-        return $this->render('index', ['product' => $product]);
+        return \Yii::$app->test->run();
+        //$product = new Product([ 'id'=> 35, 'name'=>'reebok', 'category' => 'shoose', 'price' => 350]);
+        //return $this->render('index', ['product' => $product]);
         //return $this->render('index');
         //return $this->renderContent('It is class TestController');
     }

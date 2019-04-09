@@ -47,9 +47,9 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-            ],
+            'rules' => [],
         ],
+        'test' => app\components\TestService::class,
 
     ],
     'params' => $params,
