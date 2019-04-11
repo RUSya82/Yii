@@ -23,12 +23,12 @@ class Product extends \yii\db\ActiveRecord
         return 'product';
     }
 
-    public function scenarios()
-    {
-        return [
-            self::SCENARIO_DEFAULT => ['name']
-        ];
-    }
+//    public function scenarios()
+//    {
+//        return [
+//            self::SCENARIO_DEFAULT => ['name']
+//        ];
+//    }
 
     /**
      * {@inheritdoc}
