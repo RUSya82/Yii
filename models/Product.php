@@ -31,7 +31,14 @@ class Product extends \yii\db\ActiveRecord
         return [
             [['name', 'price', 'created_at'], 'required'],
             [['created_at'], 'integer'],
-            [['name', 'price', 'category'], 'string', 'max' => 50],
+            [['category'], 'string', 'max' => 50],
+            [['name'], 'string', 'max' => 20],
+            [['name'], 'filter', 'filter' => 'trim'],
+            [['name'], 'filter', 'filter' => function($val){
+                return strip_tags($val);
+            }],
+            [['price'], 'integer', 'max' => 1000, 'min' => 0],
+
         ];
     }
 
