@@ -38,7 +38,8 @@ class Product extends \yii\db\ActiveRecord
         return [
             [['name', 'price', 'created_at'], 'required'],
             [['created_at'], 'integer'],
-            [['category'], 'string', 'max' => 50],
+            [['category'], 'string', 'on'=>'update', 'max' => 10],
+            [['category'], 'string', 'on'=>'create', 'max' => 20],
             [['name'], 'string', 'max' => 20],
             [['name'], 'filter', 'filter' => 'trim'],
             [['name'], 'filter', 'filter' => function($val){
