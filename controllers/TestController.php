@@ -49,6 +49,17 @@ class TestController extends Controller
             ->all();
         $query3 = new Query();
         $data3 = $query3->from('user')->select('count(*)')->one();
+
+        //********************** Task №5 ********************************
+        $batch = \Yii::$app->db->createCommand()->batchInsert('task', [
+            'title', 'description', 'creator_id', 'created_at'
+        ],
+            [
+                ['first task', 'first', 1, time()],
+                ['second task', 'second', 4, time()],
+                ['third task', 'third', 6, time()],
+            ])->execute();
+
         return $this->render('index', ['data' => $data, 'data2' => $data2, 'data3' => $data3]);
         //return $this->render('index');
         //return $this->renderContent('It is class TestController');
