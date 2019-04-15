@@ -7,5 +7,5 @@ echo "This is file 'test/index.php'<br>";
 
 //echo $product->name;
 //echo \yii\widgets\DetailView::widget(['model' => $product]);
-echo $test;
+var_dump($test);
 

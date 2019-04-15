@@ -16,9 +16,10 @@ class TestController extends Controller
 
     public function actionIndex()
     {
-        $test = Yii::$app->test->run();
+        //$test = Yii::$app->test->run();
         //$product = new Product([ 'id'=> 35, 'name'=>'reebok', 'category' => 'shoose', 'price' => 350]);
-        return $this->render('index', ['test' => $test]);
+        $data = \Yii::$app->db->createCommand('SELECT [[name]], [[price]], [[category]] FROM {{product}}')->queryAll();
+        return $this->render('index', ['test' => $data]);
         //return $this->render('index');
         //return $this->renderContent('It is class TestController');
     }
