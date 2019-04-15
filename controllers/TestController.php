@@ -48,19 +48,24 @@ class TestController extends Controller
             ->orderBy('username')
             ->all();
         $query3 = new Query();
-        $data3 = $query3->from('user')->select('count(*)')->one();
+        $data3 = $query3->from('user')->select('count(*)')->scalar();
 
         //********************** Task №5 ********************************
-        $batch = \Yii::$app->db->createCommand()->batchInsert('task', [
-            'title', 'description', 'creator_id', 'created_at'
-        ],
-            [
-                ['first task', 'first', 1, time()],
-                ['second task', 'second', 4, time()],
-                ['third task', 'third', 6, time()],
-            ])->execute();
-
-        return $this->render('index', ['data' => $data, 'data2' => $data2, 'data3' => $data3]);
+//        $batch = \Yii::$app->db->createCommand()->batchInsert('task', [
+//            'title', 'description', 'creator_id', 'created_at'
+//        ],
+//            [
+//                ['first task', 'first', 1, time()],
+//                ['second task', 'second', 4, time()],
+//                ['third task', 'third', 6, time()],
+//            ])->execute();
+        //*********************** Task №6 **********************************
+        $query4 = new Query();
+        $data4 = $query4->from('task')
+            ->select('*')
+            ->innerJoin('user', 'user.id = task.creator_id')->all();
+        _log($data4);
+        return $this->render('index', ['data' => $data, 'data2' => $data2, 'data3' => $data3, 'data4' => $data4]);
         //return $this->render('index');
         //return $this->renderContent('It is class TestController');
     }
