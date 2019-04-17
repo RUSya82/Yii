@@ -5,25 +5,24 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "user".
+ * This is the model class for table "task".
  *
  * @property int $id
- * @property string $username
- * @property string $password_hash
- * @property string $auth_key
+ * @property string $title
+ * @property string $description
  * @property int $creator_id
  * @property int $updater_id
  * @property int $created_at
  * @property int $updated_at
  */
-class User extends \yii\db\ActiveRecord
+class Task extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'user';
+        return 'task';
     }
 
     /**
@@ -32,9 +31,10 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'password_hash', 'creator_id', 'created_at'], 'required'],
+            [['title', 'description', 'creator_id', 'created_at'], 'required'],
+            [['description'], 'string'],
             [['creator_id', 'updater_id', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'password_hash', 'auth_key'], 'string', 'max' => 255],
+            [['title'], 'string', 'max' => 255],
         ];
     }
 
@@ -45,9 +45,8 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'username' => 'Username',
-            'password_hash' => 'Password Hash',
-            'auth_key' => 'Auth Key',
+            'title' => 'Title',
+            'description' => 'Description',
             'creator_id' => 'Creator ID',
             'updater_id' => 'Updater ID',
             'created_at' => 'Created At',
@@ -57,10 +56,10 @@ class User extends \yii\db\ActiveRecord
 
     /**
      * {@inheritdoc}
-     * @return \app\models\query\UserQuery the active query used by this AR class.
+     * @return \app\models\query\TaskQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new \app\models\query\UserQuery(get_called_class());
+        return new \app\models\query\TaskQuery(get_called_class());
     }
 }
