@@ -22,6 +22,9 @@ use Yii;
  */
 class User extends \yii\db\ActiveRecord
 {
+    const RELATION_TASKS = 'tasks';
+    const RELATION_TASKS0 = 'tasks0';
+    const RELATION_TASK_USERS = 'taskUsers';
     /**
      * {@inheritdoc}
      */

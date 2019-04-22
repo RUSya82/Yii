@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Task;
 use Yii;
 use app\models\User;
 use yii\data\ActiveDataProvider;
@@ -109,6 +110,26 @@ class UserController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionTest(){
+        $user = new User([
+            'username' => 'Kristy',
+            'password_hash' => '56ds6dgfg544g44huyuol6',
+            'auth_key' => '5d6fe65e',
+            'creator_id' => 8,
+            'created_at' => time()
+        ]);
+        $user->save();
+        echo $user->id;
+        $task = new Task(['title' => 'tasktest 1', 'description' => 'Task Test №1', 'created_at' => time() ]);
+        $task->link(Task::RELATION_CREATOR, $user);
+        var_dump($task);
+        $task = new Task(['title' => 'tasktest 2', 'description' => 'Task Test №2', 'created_at' => time() ]);
+        $task->link(Task::RELATION_CREATOR, $user);
+        var_dump($task);
+        $task = new Task(['title' => 'tasktest 3', 'description' => 'Task Test №3', 'created_at' => time() ]);
+        $task->link(Task::RELATION_CREATOR, $user);
+        var_dump($task);
+    }
     /**
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
