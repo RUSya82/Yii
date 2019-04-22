@@ -129,6 +129,7 @@ class UserController extends Controller
 //        $task = new Task(['title' => 'tasktest 3', 'description' => 'Task Test №3', 'created_at' => time() ]);
 //        $task->link(Task::RELATION_CREATOR, $user);
 //        var_dump($task);
+          //Жадная без JOIN
           $users = User::find()->with(User::RELATION_TASKS)->all();
           foreach ($users as $user){
               //var_dump($user->tasks);
@@ -138,6 +139,16 @@ class UserController extends Controller
               }
               echo "<br>";
           }
+          // JOIN
+            $users = User::find()->joinWith(User::RELATION_TASKS)->all();
+            foreach ($users as $user){
+                //var_dump($user->tasks);
+                echo "user ID: $user->id,  user name: $user->username, created tasks: <br>";
+                foreach ($user->tasks as $task){
+                    echo "task ID: $task->id,   task name: $task->title, ";
+                }
+                echo "<br>";
+            }
 
 
     }
