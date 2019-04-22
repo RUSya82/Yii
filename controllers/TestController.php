@@ -11,6 +11,8 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Product;
+use app\models\User;
+use app\models\Task;
 
 class TestController extends Controller
 {
@@ -39,16 +41,22 @@ class TestController extends Controller
 //            'created_at' =>time(),
 //        ])->execute();
 
-        $query = new Query();
-        $data = $query->from('user')->select('*')->where(['id' => 1])->one();
-        $query2 = new Query();
-        $data2 = $query2->from('user')
-            ->select('*')
-            ->where(['>','id','1'])
-            ->orderBy('username')
-            ->all();
-        $query3 = new Query();
-        $data3 = $query3->from('user')->select('count(*)')->scalar();
+//        $query = new Query();
+////        $data = $query->from('user')->select('*')->where(['id' => 1])->one();
+////        $query2 = new Query();
+////        $data2 = $query2->from('user')
+////            ->select('*')
+////            ->where(['>','id','1'])
+////            ->orderBy('username')
+////            ->all();
+////        $query3 = new Query();
+////        $data3 = $query3->from('user')->select('count(*)')->scalar();
+//            $user = User::findOne(8);
+//            //var_dump($user);
+//            _end($user->getAccessedTasks()->all());
+        $tasks = Task::findOne(5);
+        //var_dump($user);
+        _end($tasks->getAccessedUsers()->all());
 
         //********************** Task №5 ********************************
 //        $batch = \Yii::$app->db->createCommand()->batchInsert('task', [
@@ -65,7 +73,7 @@ class TestController extends Controller
             ->select('*')
             ->innerJoin('user', 'user.id = task.creator_id')->all();
         _log($data4);
-        return $this->render('index', ['data' => $data, 'data2' => $data2, 'data3' => $data3, 'data4' => $data4]);
+        return $this->render('index', ['data' => $data4]);
         //return $this->render('index');
         //return $this->renderContent('It is class TestController');
     }
