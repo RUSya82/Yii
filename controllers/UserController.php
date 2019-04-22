@@ -111,24 +111,35 @@ class UserController extends Controller
     }
 
     public function actionTest(){
-        $user = new User([
-            'username' => 'Kristy',
-            'password_hash' => '56ds6dgfg544g44huyuol6',
-            'auth_key' => '5d6fe65e',
-            'creator_id' => 8,
-            'created_at' => time()
-        ]);
-        $user->save();
-        echo $user->id;
-        $task = new Task(['title' => 'tasktest 1', 'description' => 'Task Test №1', 'created_at' => time() ]);
-        $task->link(Task::RELATION_CREATOR, $user);
-        var_dump($task);
-        $task = new Task(['title' => 'tasktest 2', 'description' => 'Task Test №2', 'created_at' => time() ]);
-        $task->link(Task::RELATION_CREATOR, $user);
-        var_dump($task);
-        $task = new Task(['title' => 'tasktest 3', 'description' => 'Task Test №3', 'created_at' => time() ]);
-        $task->link(Task::RELATION_CREATOR, $user);
-        var_dump($task);
+//        $user = new User([
+//            'username' => 'Kristy',
+//            'password_hash' => '56ds6dgfg544g44huyuol6',
+//            'auth_key' => '5d6fe65e',
+//            'creator_id' => 8,
+//            'created_at' => time()
+//        ]);
+//        $user->save();
+//        echo $user->id;
+//        $task = new Task(['title' => 'tasktest 1', 'description' => 'Task Test №1', 'created_at' => time() ]);
+//        $task->link(Task::RELATION_CREATOR, $user);
+//        var_dump($task);
+//        $task = new Task(['title' => 'tasktest 2', 'description' => 'Task Test №2', 'created_at' => time() ]);
+//        $task->link(Task::RELATION_CREATOR, $user);
+//        var_dump($task);
+//        $task = new Task(['title' => 'tasktest 3', 'description' => 'Task Test №3', 'created_at' => time() ]);
+//        $task->link(Task::RELATION_CREATOR, $user);
+//        var_dump($task);
+          $users = User::find()->with(User::RELATION_TASKS)->all();
+          foreach ($users as $user){
+              //var_dump($user->tasks);
+              echo "user ID: $user->id,  user name: $user->username, created tasks: <br>";
+              foreach ($user->tasks as $task){
+                  echo "task ID: $task->id,   task name: $task->title, ";
+              }
+              echo "<br>";
+          }
+
+
     }
     /**
      * Finds the User model based on its primary key value.
