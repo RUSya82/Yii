@@ -150,7 +150,6 @@ class UserController extends Controller
                 echo "<br>";
             }
 
-
     }
     /**
      * Finds the User model based on its primary key value.
