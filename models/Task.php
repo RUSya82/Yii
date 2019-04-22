@@ -33,6 +33,15 @@ class Task extends \yii\db\ActiveRecord
         return 'task';
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class
+            ]
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
