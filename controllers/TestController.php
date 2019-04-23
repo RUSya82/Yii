@@ -54,9 +54,9 @@ class TestController extends Controller
 //            $user = User::findOne(8);
 //            //var_dump($user);
 //            _end($user->getAccessedTasks()->all());
-        $tasks = Task::findOne(5);
+//        $tasks = Task::findOne(5);
         //var_dump($user);
-        _end($tasks->getAccessedUsers()->all());
+//        _end($tasks->getAccessedUsers()->all());
 
         //********************** Task №5 ********************************
 //        $batch = \Yii::$app->db->createCommand()->batchInsert('task', [
@@ -67,15 +67,31 @@ class TestController extends Controller
 //                ['second task', 'second', 4, time()],
 //                ['third task', 'third', 6, time()],
 //            ])->execute();
+//        $user = new User([
+//            'username' => 'Olga',
+//            'password_hash' => 'dsd6d5w655gt6uk4i5u980',
+//            'creator_id' => 8,
+//        ]);
+//        $user->save();
+        //_end($user);
         //*********************** Task №6 **********************************
         $query4 = new Query();
         $data4 = $query4->from('task')
             ->select('*')
             ->innerJoin('user', 'user.id = task.creator_id')->all();
         _log($data4);
-        return $this->render('index', ['data' => $data4]);
+        return $this->render('index', ['data4' => $data4]);
         //return $this->render('index');
         //return $this->renderContent('It is class TestController');
     }
+
+    public function actionTest(){
+        $task = Task::findOne(10);
+        $task->title = 'TaskTest8(updated)';
+        $task->description = 'TaskTest8 description(updated)';
+        $task->save();
+        _end($task);
+    }
+
 
 }
