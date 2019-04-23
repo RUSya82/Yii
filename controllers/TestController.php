@@ -19,62 +19,7 @@ class TestController extends Controller
 
     public function actionIndex()
     {
-        //$test = Yii::$app->test->run();
-        //$product = new Product([ 'id'=> 35, 'name'=>'reebok', 'category' => 'shoose', 'price' => 350]);
-        //$data = \Yii::$app->db->createCommand('SELECT [[name]], [[price]], [[category]] FROM {{product}}')->queryAll();
-//        $data = \Yii::$app->db->createCommand()->insert('user', [
-//            'username' => 'Anton',
-//            'password_hash' => '2df68sd45f6df8g2q3lp',
-//            'creator_id' => 35,
-//            'created_at' =>time(),
-//        ])->execute();
-//        $data = \Yii::$app->db->createCommand()->insert('user', [
-//            'username' => 'Marat',
-//            'password_hash' => '65d689d5rd1df8g2q3lp',
-//            'creator_id' => 35,
-//            'created_at' =>time(),
-//        ])->execute();
-//        $data = \Yii::$app->db->createCommand()->insert('user', [
-//            'username' => 'Ubuntu',
-//            'password_hash' => '86g689d5rdf5f8g2q5tg',
-//            'creator_id' => 35,
-//            'created_at' =>time(),
-//        ])->execute();
 
-//        $query = new Query();
-////        $data = $query->from('user')->select('*')->where(['id' => 1])->one();
-////        $query2 = new Query();
-////        $data2 = $query2->from('user')
-////            ->select('*')
-////            ->where(['>','id','1'])
-////            ->orderBy('username')
-////            ->all();
-////        $query3 = new Query();
-////        $data3 = $query3->from('user')->select('count(*)')->scalar();
-//            $user = User::findOne(8);
-//            //var_dump($user);
-//            _end($user->getAccessedTasks()->all());
-//        $tasks = Task::findOne(5);
-        //var_dump($user);
-//        _end($tasks->getAccessedUsers()->all());
-
-        //********************** Task №5 ********************************
-//        $batch = \Yii::$app->db->createCommand()->batchInsert('task', [
-//            'title', 'description', 'creator_id', 'created_at'
-//        ],
-//            [
-//                ['first task', 'first', 1, time()],
-//                ['second task', 'second', 4, time()],
-//                ['third task', 'third', 6, time()],
-//            ])->execute();
-//        $user = new User([
-//            'username' => 'Olga',
-//            'password_hash' => 'dsd6d5w655gt6uk4i5u980',
-//            'creator_id' => 8,
-//        ]);
-//        $user->save();
-        //_end($user);
-        //*********************** Task №6 **********************************
         $query4 = new Query();
         $data4 = $query4->from('task')
             ->select('*')
