@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Task;
 use yii\data\ActiveDataProvider;
+use yii\db\Query;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -43,13 +44,14 @@ class TaskController extends Controller
      * Lists all Task models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionMy()
     {
+        $query = Task::find()->byCreator(Yii::$app->user->id);
         $dataProvider = new ActiveDataProvider([
-            'query' => Task::find(),
+            'query' => $query,
         ]);
-
-        return $this->render('index', [
+        //$dataProvider->pagination->pageSize = 5;      //число записей на странице
+        return $this->render('my', [
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -75,9 +77,9 @@ class TaskController extends Controller
     public function actionCreate()
     {
         $model = new Task();
-
+        Yii::$app->session->setFlash('success', "Task created");
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['task/my', 'id' => $model->id]);
         }
 
         return $this->render('create', [
