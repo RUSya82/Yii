@@ -73,12 +73,13 @@ class TaskUserController extends Controller
     /**
      * Creates a new TaskUser model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @var $model Task
      * @return mixed
      */
     public function actionCreate($taskId)
     {
         $model = Task::findOne($taskId);
-        if($model->creator_id != Yii::$app->user->id || !$model){
+        if(($model->creator_id != Yii::$app->user->id) || !$model){
             throw new ForbiddenHttpException();
         }
         $model = new TaskUser();

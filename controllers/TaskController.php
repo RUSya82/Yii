@@ -77,8 +77,9 @@ class TaskController extends Controller
     public function actionCreate()
     {
         $model = new Task();
-        Yii::$app->session->setFlash('success', "Task created");
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', "Task created");
             return $this->redirect(['task/my', 'id' => $model->id]);
         }
 
