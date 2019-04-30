@@ -16,6 +16,7 @@ use yii\filters\VerbFilter;
  */
 class TaskController extends Controller
 {
+    public $defaultAction ='my';
     /**
      * {@inheritdoc}
      */

@@ -15,6 +15,7 @@ use yii\filters\VerbFilter;
 
 /**
  * TaskUserController implements the CRUD actions for TaskUser model.
+ * @var $model Task
  */
 class TaskUserController extends Controller
 {
@@ -79,7 +80,7 @@ class TaskUserController extends Controller
     public function actionCreate($taskId)
     {
         $model = Task::findOne($taskId);
-        if(($model->creator_id != Yii::$app->user->id) || !$model){
+        if(!$model || ($model->creator_id != Yii::$app->user->id) ){
             throw new ForbiddenHttpException();
         }
         $model = new TaskUser();
