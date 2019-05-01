@@ -57,6 +57,34 @@ class TaskController extends Controller
         ]);
     }
 
+    public function actionShared()
+    {
+        $query = Task::find()
+            ->byCreator(Yii::$app->user->id)
+            ->innerJoinWith(Task::RELATION_TASK_USERS);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+        //$dataProvider->pagination->pageSize = 5;      //число записей на странице
+        return $this->render('shared', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionAccessed()
+    {
+        $query = Task::find()
+            ->innerJoinWith(Task::RELATION_TASK_USERS)
+            ->where(['user_id' => Yii::$app->user->id]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+        //$dataProvider->pagination->pageSize = 5;      //число записей на странице
+        return $this->render('accessed', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     /**
      * Displays a single Task model.
      * @param integer $id
