@@ -95,7 +95,7 @@ class TaskController extends Controller
     public function actionView($id)
     {
         $task = $this->findModel($id);
-        if(!$task || ($task->creator_id != Yii::$app->user->id) ){
+        if(!$task || (!in_array(Yii::$app->user->id, $task->getAccessedUsers()->select('id')->column()) && ($task->creator_id != Yii::$app->user->id))){
             throw new ForbiddenHttpException();
         }
         $dataProvider = new ActiveDataProvider([
