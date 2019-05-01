@@ -22,7 +22,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            'title',
+            //'title',
+            [
+                'label' => 'title',
+                'value' => function(\app\models\Task $model){
+                    return Html::a($model->title, ['task/view', 'id' => $model->id]);
+                },
+                'format' => 'html',
+            ] ,
             'description:ntext',
             'created_at:datetime',
             'updated_at:datetime',

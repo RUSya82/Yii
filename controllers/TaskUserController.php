@@ -38,6 +38,7 @@ class TaskUserController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    'unshare-all' => ['POST'],
                 ],
             ],
         ];
@@ -98,6 +99,22 @@ class TaskUserController extends Controller
             'model' => $model,
             'users' => $users,
         ]);
+    }
+    /**
+     * Creates a new TaskUser model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @var $model Task
+     * @return mixed
+     */
+    public function actionUnshareAll($taskId)
+    {
+        $model = Task::findOne($taskId);
+        if(!$model || ($model->creator_id != Yii::$app->user->id) ){
+            throw new ForbiddenHttpException();
+        }
+        $model->unlinkAll(Task::RELATION_ACCESSED_USERS, true);
+        Yii::$app->session->setFlash('success', 'Unshare success');
+        return $this->redirect(['task/shared']);
     }
 
     /**

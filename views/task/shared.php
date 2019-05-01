@@ -19,7 +19,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            'title',
+            //'title',
+            [
+                    'label' => 'title',
+                    'value' => function(\app\models\Task $model){
+                                return Html::a($model->title, ['task/view', 'id' => $model->id]);
+                    },
+                    'format' => 'html',
+            ] ,
             'description:ntext',
             [
                     'label' => "Users",
@@ -39,12 +46,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                     'class' => 'yii\grid\ActionColumn',
-                    'template' => '{view} {update} {delete} {share}',
+                    'template' => '{view} {update} {delete} {unshare}',
                     'buttons' =>[
-                            'share' => function ($url, $model, $key){
-                                $icon = \yii\bootstrap\Html::icon('share');
+                            'unshare' => function ($url, $model, $key){
+                                $icon = \yii\bootstrap\Html::icon('remove');
 
-                                return Html::a($icon, ['task-user/create', 'taskId' => $model->id]);
+                                return Html::a($icon, ['task-user/unshare-all', 'taskId' => $model->id],[
+                                    'data' => [
+                                        'confirm' => 'Unshare All&',
+                                        'method' => 'post',
+                                    ],
+                                ]);
                             }
                     ]
             ],

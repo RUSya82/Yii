@@ -26,6 +26,7 @@ class Task extends \yii\db\ActiveRecord
     const RELATION_CREATOR = 'creator';
     const RELATION_UPDATER = 'updater';
     const RELATION_TASK_USERS = 'taskUsers';
+    const RELATION_ACCESSED_USERS = 'accessedUsers';
 
     /**
      * {@inheritdoc}
