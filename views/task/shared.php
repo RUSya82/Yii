@@ -19,19 +19,21 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            //['class' => 'yii\grid\SerialColumn'],
-
-            //'id',
             'title',
             'description:ntext',
             [
                     'label' => "Users",
                     'value' => function(\app\models\Task $model){
-                    return join(', ' , $model->getAccessedUsers()->select('username') ->column());
-                    }
+                                $values = $model->getAccessedUsers()->all();
+                               // _end($values);
+                                $data = [];
+                                foreach ($values as $value){
+                                    $data[] = Html::a($value->username, ['user/view', 'id' => $value->id]);
+                                }
+                                return join(', ' , $data);
+                    },
+                    'format' => 'html'
             ],
-            //'creator_id',
-            //'updater_id',
             'created_at:datetime',
             'updated_at:datetime',
 
@@ -41,6 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'buttons' =>[
                             'share' => function ($url, $model, $key){
                                 $icon = \yii\bootstrap\Html::icon('share');
+
                                 return Html::a($icon, ['task-user/create', 'taskId' => $model->id]);
                             }
                     ]
