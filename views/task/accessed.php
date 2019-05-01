@@ -26,11 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'description:ntext',
             'created_at:datetime',
             'updated_at:datetime',
+            //Html::a('creator.name', ['user/view', 'id' => 'creator.id']),
             [
-                'label' => "Users",
+                'label' => "Created At",
                 'value' => function(\app\models\Task $model){
-                    return Html::a($model->getCreator()->select('username')->one()['username'], ['user/view', 'id' => $model->creator_id]);
-                }
+                    return Html::a($model->getCreator()->select('username')->column()[0], ['user/view', 'id' => $model->creator_id]);
+                },
+                'format' => 'html'
             ],
         ],
     ]); ?>
