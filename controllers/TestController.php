@@ -20,11 +20,7 @@ class TestController extends Controller
     public function actionIndex()
     {
 
-        $query4 = new Query();
-        $data4 = $query4->from('task')
-            ->select('*')
-            ->innerJoin('user', 'user.id = task.creator_id')->all();
-        _log($data4);
+
         return $this->render('index', ['data4' => $data4]);
         //return $this->render('index');
         //return $this->renderContent('It is class TestController');

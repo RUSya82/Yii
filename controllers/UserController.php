@@ -133,7 +133,7 @@ class UserController extends Controller
 //        echo $user->id;
 //        $task = new Task(['title' => 'tasktest 1', 'description' => 'Task Test №1', 'created_at' => time() ]);
 //        $task->link(Task::RELATION_CREATOR, $user);
-//        var_dump($task);
+ //      var_dump($task);
 //        $task = new Task(['title' => 'tasktest 2', 'description' => 'Task Test №2', 'created_at' => time() ]);
 //        $task->link(Task::RELATION_CREATOR, $user);
 //        var_dump($task);

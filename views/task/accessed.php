@@ -22,19 +22,20 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            //['class' => 'yii\grid\SerialColumn'],
-
-            //'id',
             'title',
             'description:ntext',
-            //'creator_id',
-            //'updater_id',
             'created_at:datetime',
             'updated_at:datetime',
-            'creator.username'
+            [
+                'label' => "Users",
+                'value' => function(\app\models\Task $model){
+                    return Html::a($model->getCreator()->select('username')->one()['username'], ['user/view', 'id' => $model->creator_id]);
+                }
+            ],
         ],
     ]); ?>
 
     <?php Pjax::end(); ?>
 
 </div>
+
